@@ -1,0 +1,433 @@
+/* Freefall theme core styles
+-------------------------------------------------- */
+
+:root {
+  --freefall-sky-top: #0b2a4a;
+  --freefall-sky-mid: #1c6fa5;
+  --freefall-sky-low: #8bd4f2;
+  --freefall-sun: #ffd166;
+  --freefall-parachute: #ff7a59;
+  --freefall-gear: #0b1d2a;
+  --freefall-ink: #0b1d2a;
+  --freefall-white: #f7fbff;
+  --freefall-cloud: rgba(255, 255, 255, 0.7);
+  --freefall-card: rgba(255, 255, 255, 0.86);
+  --freefall-border: rgba(255, 255, 255, 0.3);
+  --freefall-shadow: 0 24px 60px rgba(4, 28, 56, 0.28);
+  --freefall-wind: rgba(255, 255, 255, 0.3);
+  --freefall-glass: rgba(10, 24, 39, 0.7);
+}
+
+[data-bs-theme="dark"] {
+  --freefall-sky-top: #04070f;
+  --freefall-sky-mid: #0c223d;
+  --freefall-sky-low: #1a3a5a;
+  --freefall-sun: #f6b26b;
+  --freefall-parachute: #ff8b6a;
+  --freefall-ink: #e9f2ff;
+  --freefall-white: #f7fbff;
+  --freefall-cloud: rgba(255, 255, 255, 0.12);
+  --freefall-card: rgba(6, 16, 29, 0.72);
+  --freefall-border: rgba(255, 255, 255, 0.12);
+  --freefall-shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
+  --freefall-wind: rgba(255, 255, 255, 0.12);
+  --freefall-glass: rgba(5, 14, 24, 0.7);
+}
+
+body.theme-freefall {
+  background: linear-gradient(
+    180deg,
+    var(--freefall-sky-top) 0%,
+    var(--freefall-sky-mid) 45%,
+    var(--freefall-sky-low) 100%
+  );
+  color: var(--freefall-ink);
+  min-height: 100%;
+}
+
+body.theme-freefall a {
+  color: var(--freefall-gear);
+}
+
+[data-bs-theme="dark"] body.theme-freefall a {
+  color: var(--freefall-white);
+}
+
+body.theme-freefall a:hover {
+  color: var(--freefall-parachute);
+}
+
+.freefall-main {
+  position: relative;
+  z-index: 2;
+}
+
+.freefall-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.freefall-atmosphere::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.22), transparent 45%),
+    radial-gradient(circle at 82% 6%, rgba(255, 255, 255, 0.18), transparent 40%),
+    radial-gradient(circle at 70% 40%, rgba(255, 255, 255, 0.12), transparent 55%);
+  opacity: 0.65;
+}
+
+.freefall-sun {
+  position: absolute;
+  top: -140px;
+  right: -120px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 209, 102, 0.95), rgba(255, 209, 102, 0.2) 55%, transparent 70%);
+  filter: blur(0.5px);
+  opacity: 0.9;
+}
+
+.freefall-clouds {
+  position: absolute;
+  left: -50%;
+  width: 200%;
+  height: 35%;
+  background-image:
+    radial-gradient(ellipse at 8% 70%, var(--freefall-cloud) 0%, var(--freefall-cloud) 22%, transparent 42%),
+    radial-gradient(ellipse at 22% 55%, var(--freefall-cloud) 0%, var(--freefall-cloud) 28%, transparent 48%),
+    radial-gradient(ellipse at 48% 70%, var(--freefall-cloud) 0%, var(--freefall-cloud) 20%, transparent 40%),
+    radial-gradient(ellipse at 72% 50%, var(--freefall-cloud) 0%, var(--freefall-cloud) 24%, transparent 44%),
+    radial-gradient(ellipse at 90% 65%, var(--freefall-cloud) 0%, var(--freefall-cloud) 20%, transparent 40%);
+  opacity: 0.55;
+  filter: blur(1px);
+  animation: freefall-drift 90s linear infinite;
+}
+
+.freefall-clouds--back {
+  top: 18%;
+  opacity: 0.45;
+  animation-duration: 120s;
+}
+
+.freefall-clouds--front {
+  top: 36%;
+  opacity: 0.65;
+  animation-duration: 80s;
+}
+
+.freefall-wind {
+  position: absolute;
+  top: 5%;
+  left: -10%;
+  right: -10%;
+  height: 60%;
+  background-image: repeating-linear-gradient(
+    120deg,
+    transparent 0,
+    transparent 26px,
+    var(--freefall-wind) 26px,
+    var(--freefall-wind) 28px
+  );
+  opacity: 0.35;
+  animation: freefall-wind 12s linear infinite;
+}
+
+.freefall-nav {
+  background: var(--freefall-glass);
+  border-bottom: 1px solid var(--freefall-border);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 14px 30px rgba(4, 16, 30, 0.35);
+  z-index: 5;
+}
+
+.freefall-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--freefall-white);
+}
+
+.freefall-brand .ctf_logo {
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.3));
+}
+
+.freefall-nav .nav-link {
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.freefall-nav .nav-link:hover {
+  color: var(--freefall-sun);
+  transform: translateY(-1px);
+}
+
+.freefall-nav .dropdown-menu {
+  background: rgba(9, 20, 32, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.35);
+}
+
+.freefall-nav .dropdown-item {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.freefall-nav .dropdown-item:hover {
+  color: var(--freefall-sun);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.freefall-nav .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.theme-freefall h1,
+.theme-freefall h2,
+.theme-freefall h3 {
+  font-family: "Raleway", sans-serif;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.freefall-hero {
+  text-align: left;
+}
+
+.freefall-hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.5rem;
+}
+
+.freefall-hero-copy {
+  max-width: 32rem;
+}
+
+.freefall-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  font-size: 0.75rem;
+  margin-bottom: 0.6rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.freefall-subtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 0;
+}
+
+.freefall-altimeter {
+  position: relative;
+  width: min(220px, 55vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.35), transparent 55%),
+    rgba(7, 18, 30, 0.85);
+  border: 1px solid var(--freefall-border);
+  box-shadow: var(--freefall-shadow);
+  display: grid;
+  place-items: center;
+}
+
+.freefall-altimeter .altimeter-face {
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.35);
+  box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.06);
+}
+
+.freefall-altimeter .altimeter-needle {
+  position: absolute;
+  width: 2px;
+  height: 46%;
+  background: var(--freefall-sun);
+  top: 12%;
+  left: 50%;
+  transform-origin: bottom center;
+  transform: translateX(-50%) rotate(18deg);
+  box-shadow: 0 0 12px rgba(255, 209, 102, 0.6);
+  animation: freefall-needle 5s ease-in-out infinite;
+}
+
+.freefall-altimeter .altimeter-readout {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.7rem 1rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #0b1d2a;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+[data-bs-theme="dark"] .freefall-altimeter .altimeter-readout {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--freefall-white);
+}
+
+.freefall-altimeter .altimeter-readout strong {
+  font-size: 1.3rem;
+  letter-spacing: 0.1em;
+}
+
+.freefall-altimeter .altimeter-readout span {
+  font-size: 0.65rem;
+  opacity: 0.8;
+}
+
+.theme-freefall .form-control,
+.theme-freefall .form-select,
+.theme-freefall .input-group-text {
+  background: var(--freefall-card);
+  border: 1px solid var(--freefall-border);
+  color: var(--freefall-ink);
+  border-radius: 12px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+[data-bs-theme="dark"] .theme-freefall .form-control,
+[data-bs-theme="dark"] .theme-freefall .form-select,
+[data-bs-theme="dark"] .theme-freefall .input-group-text {
+  color: var(--freefall-white);
+}
+
+.theme-freefall .btn-primary {
+  background: linear-gradient(135deg, var(--freefall-parachute), var(--freefall-sun));
+  border: none;
+  color: #0b1d2a;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  box-shadow: 0 12px 24px rgba(255, 122, 89, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.theme-freefall .btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 30px rgba(255, 122, 89, 0.45);
+  filter: brightness(1.03);
+}
+
+.theme-freefall .btn-outline-light {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: var(--freefall-white);
+}
+
+.theme-freefall .btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.category-header::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+[data-bs-theme="dark"] .category-header::after {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.category-header h3 {
+  margin-bottom: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+}
+
+.modal-content {
+  background: var(--freefall-card);
+  border: 1px solid var(--freefall-border);
+  border-radius: 18px;
+  box-shadow: var(--freefall-shadow);
+  backdrop-filter: blur(8px);
+}
+
+.table {
+  background: var(--freefall-card);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--freefall-shadow);
+}
+
+.table thead {
+  background: rgba(9, 22, 36, 0.85);
+  color: var(--freefall-white);
+}
+
+.table tbody tr {
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+@media (min-width: 992px) {
+  .freefall-hero-inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .freefall-clouds,
+  .freefall-wind,
+  .freefall-altimeter .altimeter-needle {
+    animation: none;
+  }
+}
+
+@keyframes freefall-drift {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(35%);
+  }
+}
+
+@keyframes freefall-wind {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(8%);
+  }
+}
+
+@keyframes freefall-needle {
+  0% {
+    transform: translateX(-50%) rotate(12deg);
+  }
+  50% {
+    transform: translateX(-50%) rotate(30deg);
+  }
+  100% {
+    transform: translateX(-50%) rotate(12deg);
+  }
+}

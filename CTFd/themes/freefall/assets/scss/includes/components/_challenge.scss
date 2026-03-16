@@ -1,0 +1,89 @@
+/* Challenge styles
+-------------------------------------------------- */
+
+.challenge-desc {
+  overflow-wrap: anywhere;
+
+  img {
+    max-width: 100%;
+  }
+}
+
+.challenge-button {
+  border: 1px solid var(--freefall-border);
+  background: var(--freefall-card);
+  color: var(--freefall-ink);
+  border-radius: 18px;
+  box-shadow: var(--freefall-shadow);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.1) 0,
+      rgba(255, 255, 255, 0.1) 2px,
+      transparent 2px,
+      transparent 26px
+    );
+    opacity: 0.35;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 26px 60px rgba(4, 28, 56, 0.35);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--freefall-shadow), 0 0 0 3px rgba(255, 122, 89, 0.35);
+  }
+
+  .challenge-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+    text-align: left;
+  }
+
+  .challenge-inner p {
+    margin-bottom: 0;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  .challenge-inner span {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(11, 29, 42, 0.1);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  &.challenge-solved {
+    background: linear-gradient(135deg, rgba(19, 130, 82, 0.92), rgba(50, 215, 122, 0.92));
+    color: #0b1d2a;
+
+    .challenge-inner span {
+      background: rgba(255, 255, 255, 0.6);
+    }
+  }
+}
+
+[data-bs-theme="dark"] .challenge-button {
+  color: var(--freefall-white);
+}
+
+[data-bs-theme="dark"] .challenge-button .challenge-inner span {
+  background: rgba(255, 255, 255, 0.12);
+}

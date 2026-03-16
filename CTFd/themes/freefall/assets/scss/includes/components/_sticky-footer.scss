@@ -1,0 +1,41 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+main {
+  /* Margin bottom by footer height */
+  margin-bottom: 120px;
+}
+
+.footer {
+  position: absolute;
+
+  /* prevent scrollbars from showing on pages that don't use the full page height */
+  bottom: 0;
+
+  width: 100%;
+
+  /* Set the fixed height of the footer here */
+  height: 64px;
+
+  /* Vertically center the text there */
+  line-height: 64px;
+
+  /* Keep visible above the atmosphere */
+  z-index: 2;
+
+  background: rgba(9, 20, 32, 0.72);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+}
+
+.footer a {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.footer .text-muted {
+  color: rgba(255, 255, 255, 0.65) !important;
+}

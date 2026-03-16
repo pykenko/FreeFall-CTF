@@ -1,0 +1,46 @@
+/* Jumbotron styles
+-------------------------------------------------- */
+
+// Move down content because we have a fixed navbar
+main {
+  padding-top: 4.5rem;
+}
+
+.jumbotron {
+  padding: 2.5rem 1.5rem;
+  margin: 2rem auto 2.5rem;
+  text-align: center;
+
+  background: linear-gradient(120deg, rgba(6, 18, 30, 0.95), rgba(24, 86, 120, 0.85));
+  color: var(--freefall-white);
+  border: 1px solid var(--freefall-border);
+  border-radius: 28px;
+  box-shadow: var(--freefall-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.jumbotron::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.12) 0,
+    rgba(255, 255, 255, 0.12) 2px,
+    transparent 2px,
+    transparent 28px
+  );
+  opacity: 0.4;
+}
+
+.jumbotron .container {
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 576px) {
+  .jumbotron {
+    padding: 3.5rem 2.5rem;
+  }
+}
